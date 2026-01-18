@@ -2,9 +2,11 @@ export interface User {
   id: number;
   username: string;
   email: string;
+  firstName: string;
+  lastName: string;
+  image: string;
 }
 
-export interface LoginResponse {
+export interface LoginResponse extends User {
   accessToken: string;
-  user: User;
 }

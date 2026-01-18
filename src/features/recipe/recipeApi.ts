@@ -18,18 +18,28 @@ export const recipesApi = api.injectEndpoints({
         page = 1,
         limit = 10,
         search = "",
-        sortBy,
-        order,
-      }) => ({
-        url: "/recipes",
-        params: {
-          q: search,
+        sortBy = "name",
+        order = "asc",
+      }) => {
+        const params: any = {
           limit,
           skip: (page - 1) * limit,
-          sortBy,
-          order,
-        },
-      }),
+        };
+        
+       
+        if (search) {
+          return {
+            url: "/recipes/search",
+            params: { ...params, q: search },
+          };
+        }
+
+       
+        return {
+          url: "/recipes",
+          params: { ...params, sortBy, order },
+        };
+      },
       providesTags: ["Recipes"],
     }),
 
