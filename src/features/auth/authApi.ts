@@ -1,4 +1,4 @@
-import { api } from "@/app/api";
+import { api } from "@/api/api";
 import type { LoginResponse, User } from "@/types";
 
 interface LoginPayload {
