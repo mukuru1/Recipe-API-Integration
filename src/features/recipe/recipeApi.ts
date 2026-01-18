@@ -1,5 +1,5 @@
 import { api } from "@/api/api";
-import type { Recipe } from "@/types";
+import type { Recipe, PaginatedResponse } from "@/types";
 
 interface RecipesQueryParams {
   page?: number;
@@ -9,12 +9,7 @@ interface RecipesQueryParams {
   order?: "asc" | "desc";
 }
 
-interface RecipesResponse {
-  recipes: Recipe[];
-  total: number;
-  skip: number;
-  limit: number;
-}
+type RecipesResponse = PaginatedResponse<Recipe>;
 
 export const recipesApi = api.injectEndpoints({
   endpoints: (builder) => ({

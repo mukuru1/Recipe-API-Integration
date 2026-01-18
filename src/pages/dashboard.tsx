@@ -1,4 +1,4 @@
-import { useAddRecipeMutation, useDeleteRecipeMutation, } from "@/features/recipes/recipesApi";
+import { useAddRecipeMutation, useDeleteRecipeMutation, } from "@/features/recipe/recipeApi";
 
 const Dashboard: React.FC = () => {
   const [addRecipe] = useAddRecipeMutation();

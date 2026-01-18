@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Hero from "@/components/Hero";
-import { useGetRecipesQuery } from "@/features/recipes/recipesApi";
+import Hero from "@/components/hero";
+import { useGetRecipesQuery } from "@/features/recipe/recipeApi";
 
 const LandingPage: React.FC = () => {
   const [page, setPage] = useState<number>(1);
