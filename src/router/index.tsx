@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import LandingPage from "@/pages/LandingPage";
-import Login from "@/pages/Login";
-import Dashboard from "@/pages/Dashboard";
-import ProtectedRoute from "@/components/ProtectedRoute";
+import LandingPage from "@/pages/landingPage";
+import Login from "@/pages/login";
+import Dashboard from "@/pages/dashboard";
+import ProtectedRoute from "@/components/protectedRoute";
 
 const router = createBrowserRouter([
   {
