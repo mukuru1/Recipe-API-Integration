@@ -1,10 +1,5 @@
 import { useState } from "react";
-import { 
-  useGetRecipesQuery, 
-  useAddRecipeMutation, 
-  useUpdateRecipeMutation, 
-  useDeleteRecipeMutation 
-} from "@/features/recipe/recipeApi";
+import { useGetRecipesQuery, useAddRecipeMutation, useUpdateRecipeMutation, useDeleteRecipeMutation } from "@/features/recipes/recipesApi";
 import { useGetMeQuery } from "@/features/auth/authApi";
 import type { Recipe } from "@/types";
 import { useAppDispatch } from "@/hooks/redux";
