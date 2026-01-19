@@ -1,21 +1,25 @@
 import { useState } from "react";
-import { useGetRecipesQuery, useAddRecipeMutation, useUpdateRecipeMutation, useDeleteRecipeMutation } from "@/features/recipe/recipeApi";
+import {
+  useGetRecipesQuery,
+  useAddRecipeMutation,
+  useUpdateRecipeMutation,
+  useDeleteRecipeMutation,
+} from "@/features/recipe/recipeApi";
 import { useGetMeQuery } from "@/features/auth/authApi";
 import type { Recipe } from "@/types";
 import { useAppDispatch } from "@/hooks/redux";
 import { logout } from "@/features/auth/authSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Dashboard: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { data: user } = useGetMeQuery();
-  const { data: recipesData, isLoading: recipesLoading } = useGetRecipesQuery({ limit: 10, page: 1 });
-  
-  const [addRecipe, { isLoading: isAdding }] = useAddRecipeMutation();
+  const { data } = useGetRecipesQuery({ limit: 10, page: 1 });
+
+  const [addRecipe] = useAddRecipeMutation();
   const [updateRecipe] = useUpdateRecipeMutation();
   const [deleteRecipe] = useDeleteRecipeMutation();
-
   const [newRecipeName, setNewRecipeName] = useState("");
 
   const handleLogout = () => {
@@ -23,115 +27,108 @@ const Dashboard: React.FC = () => {
     navigate("/login");
   };
 
-  const handleAdd = async () => {
-    if (!newRecipeName) return;
-    try {
-      await addRecipe({ name: newRecipeName, difficulty: "Medium", prepTimeMinutes: 20, cookTimeMinutes: 30 }).unwrap();
-      setNewRecipeName("");
-      alert("Recipe added successfully!");
-    } catch (err) {
-      alert("Failed to add recipe");
-    }
-  };
-
-  const handleUpdate = async (recipe: Recipe) => {
-    try {
-      await updateRecipe({ id: recipe.id, name: `${recipe.name} (Updated)` }).unwrap();
-      alert("Recipe updated!");
-    } catch (err) {
-      alert("Update failed");
-    }
-  };
-
-  const handleDelete = async (id: number) => {
-    if (window.confirm("Are you sure?")) {
-      try {
-        await deleteRecipe(id).unwrap();
-        alert("Recipe deleted!");
-      } catch (err) {
-        alert("Delete failed");
-      }
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen bg-slate-100 p-8">
       <div className="max-w-6xl mx-auto">
-        <header className="flex justify-between items-center bg-white p-6 rounded-xl shadow-md mb-8">
-          <div className="flex items-center gap-4">
-            {user?.image && <img src={user.image} alt={user.firstName} className="w-12 h-12 rounded-full border-2 border-orange-500" />}
-            <div>
-              <h2 className="text-xl font-bold">Welcome, {user?.firstName} {user?.lastName}!</h2>
-              <p className="text-gray-500 text-sm">{user?.email}</p>
-            </div>
+        {/* HEADER */}
+        <header className="bg-white p-6 rounded-xl shadow-md flex justify-between items-center mb-8">
+          <div className="flex flex-col gap-1">
+            <h2 className="text-xl font-bold text-slate-800">
+              Welcome, {user?.firstName}
+            </h2>
+            <p className="text-slate-500 text-sm">{user?.email}</p>
           </div>
-          <button 
-            onClick={handleLogout}
-            className="text-red-600 font-semibold hover:bg-red-50 px-4 py-2 rounded-lg transition-colors"
-          >
-            Logout
-          </button>
+
+          <div className="flex items-center gap-4">
+            {/* RecipeHub Button */}
+            <Link
+              to="/"
+              className="px-5 py-2 rounded-lg border border-orange-500
+                         text-orange-500 font-semibold
+                         hover:bg-orange-50 transition"
+            >
+              RecipeHub
+            </Link>
+
+            {/* Logout Button */}
+            <button
+              onClick={handleLogout}
+              className="text-orange-500 font-semibold hover:underline"
+            >
+              Logout
+            </button>
+          </div>
         </header>
 
+        {/* ADD RECIPE */}
         <section className="bg-white p-6 rounded-xl shadow-md mb-8">
-          <h3 className="text-lg font-bold mb-4">Add New Recipe</h3>
+          <h3 className="font-bold mb-4 text-slate-800">
+            Add New Recipe
+          </h3>
           <div className="flex gap-4">
-            <input 
-              type="text" 
+            <input
               value={newRecipeName}
               onChange={(e) => setNewRecipeName(e.target.value)}
-              placeholder="Recipe Name"
-              className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-500"
+              className="flex-1 px-4 py-2 border border-slate-300 rounded-lg
+                         focus:ring-2 focus:ring-orange-500 focus:outline-none"
+              placeholder="Recipe name"
             />
-            <button 
-              onClick={handleAdd}
-              disabled={isAdding}
-              className="bg-orange-500 text-white px-6 py-2 rounded-lg font-bold hover:bg-orange-600 transition-colors disabled:opacity-50"
+            <button
+              onClick={() =>
+                addRecipe({
+                  name: newRecipeName,
+                  difficulty: "Medium",
+                })
+              }
+              className="bg-orange-500 text-white px-6 py-2 rounded-lg
+                         hover:bg-orange-600 transition"
             >
-              Add Recipe
+              Add
             </button>
           </div>
         </section>
 
+        {/* MANAGE RECIPES */}
         <section className="bg-white p-6 rounded-xl shadow-md">
-          <h3 className="text-lg font-bold mb-6">Manage Your Recipes</h3>
-          {recipesLoading ? (
-            <p>Loading...</p>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left">
-                <thead>
-                  <tr className="border-b">
-                    <th className="pb-4">Name</th>
-                    <th className="pb-4 text-center">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {recipesData?.recipes.map((recipe: Recipe) => (
-                    <tr key={recipe.id} className="border-b last:border-0">
-                      <td className="py-4 font-medium">{recipe.name}</td>
-                      <td className="py-4 text-center">
-                        <div className="flex justify-center gap-2">
-                          <button 
-                            onClick={() => handleUpdate(recipe)}
-                            className="bg-blue-100 text-blue-700 px-3 py-1 rounded hover:bg-blue-200 transition-colors"
-                          >
-                            Update
-                          </button>
-                          <button 
-                            onClick={() => handleDelete(recipe.id)}
-                            className="bg-red-100 text-red-700 px-3 py-1 rounded hover:bg-red-200 transition-colors"
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+          <h3 className="font-bold mb-4 text-slate-800">
+            Manage Recipes
+          </h3>
+
+          <table className="w-full border-collapse">
+            <tbody>
+              {data?.recipes.map((recipe: Recipe) => (
+                <tr
+                  key={recipe.id}
+                  className="border-b last:border-0"
+                >
+                  <td className="py-4 font-medium text-slate-700">
+                    {recipe.name}
+                  </td>
+                  <td className="py-4 text-right space-x-2">
+                    <button
+                      onClick={() =>
+                        updateRecipe({
+                          id: recipe.id,
+                          name: `${recipe.name} (Updated)`,
+                        })
+                      }
+                      className="px-3 py-1 bg-blue-100 text-blue-700 rounded
+                                 hover:bg-blue-200 transition"
+                    >
+                      Update
+                    </button>
+                    <button
+                      onClick={() => deleteRecipe(recipe.id)}
+                      className="px-3 py-1 bg-red-100 text-red-700 rounded
+                                 hover:bg-red-200 transition"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </section>
       </div>
     </div>
