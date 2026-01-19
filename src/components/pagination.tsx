@@ -1,31 +1,34 @@
-interface PaginationProps {
+interface Props {
   page: number;
-  total: number;
-  limit: number;
-  onPageChange: (page: number) => void;
+  totalPages: number;
+  onPrev: () => void;
+  onNext: () => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({
+const Pagination: React.FC<Props> = ({
   page,
-  total,
-  limit,
-  onPageChange,
+  totalPages,
+  onPrev,
+  onNext,
 }) => {
-  const totalPages = Math.ceil(total / limit);
-
   return (
-    <div>
-      <button disabled={page === 1} onClick={() => onPageChange(page - 1)}>
+    <div className="flex justify-center items-center gap-4 mt-10">
+      <button
+        onClick={onPrev}
+        disabled={page === 1}
+        className="px-4 py-2 bg-white border rounded-md text-slate-700 disabled:opacity-50"
+      >
         Prev
       </button>
 
-      <span>
-        {page} / {totalPages}
+      <span className="text-slate-700 font-medium">
+        Page {page} of {totalPages}
       </span>
 
       <button
+        onClick={onNext}
         disabled={page === totalPages}
-        onClick={() => onPageChange(page + 1)}
+        className="px-4 py-2 bg-white border rounded-md text-slate-700 disabled:opacity-50"
       >
         Next
       </button>

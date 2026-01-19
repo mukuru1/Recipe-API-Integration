@@ -6,22 +6,25 @@ interface Props {
 
 const RecipeCard: React.FC<Props> = ({ recipe }) => {
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden transition-transform hover:scale-105 duration-300">
-      <img 
-        src={recipe.image} 
-        alt={recipe.name} 
-        className="w-full h-48 object-cover"
+    <div className="bg-white rounded-xl shadow-sm border hover:shadow-md transition p-4 flex flex-col">
+      <img
+        src={recipe.image}
+        alt={recipe.name}
+        className="h-40 w-full object-cover rounded-lg mb-4"
       />
-      <div className="p-4">
-        <h3 className="text-xl font-bold mb-2 text-gray-800">{recipe.name}</h3>
-        <div className="flex items-center justify-between">
-          <span className="bg-orange-100 text-orange-800 text-xs px-2.5 py-0.5 rounded-full font-medium uppercase">
-            {recipe.difficulty}
-          </span>
-          <span className="text-gray-500 text-sm flex items-center">
-            ⏱️ {recipe.prepTimeMinutes + recipe.cookTimeMinutes} min
-          </span>
-        </div>
+
+      <h3 className="font-semibold text-slate-800 truncate">
+        {recipe.name}
+      </h3>
+
+      <p className="text-sm text-slate-500 mt-1">
+        Difficulty: {recipe.difficulty}
+      </p>
+
+      <div className="mt-auto pt-4">
+        <button className="w-full bg-teal-500 hover:bg-teal-600 text-white py-2 rounded-lg font-medium transition">
+          View Recipe
+        </button>
       </div>
     </div>
   );
