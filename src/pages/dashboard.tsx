@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useGetRecipesQuery, useAddRecipeMutation, useUpdateRecipeMutation, useDeleteRecipeMutation } from "@/features/recipes/recipesApi";
+import { useGetRecipesQuery, useAddRecipeMutation, useUpdateRecipeMutation, useDeleteRecipeMutation } from "@/features/recipe/recipeApi";
 import { useGetMeQuery } from "@/features/auth/authApi";
 import type { Recipe } from "@/types";
 import { useAppDispatch } from "@/hooks/redux";
@@ -107,7 +107,7 @@ const Dashboard: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {recipesData?.recipes.map((recipe) => (
+                  {recipesData?.recipes.map((recipe: Recipe) => (
                     <tr key={recipe.id} className="border-b last:border-0">
                       <td className="py-4 font-medium">{recipe.name}</td>
                       <td className="py-4 text-center">
