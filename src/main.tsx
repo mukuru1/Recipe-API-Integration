@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "@/api/store";
+import { ToastProvider } from "@/context/ToastContext";
 import { RouterProvider } from "react-router-dom";
 import router from "@/router";
 import "./style.css";
@@ -9,7 +10,9 @@ import "./style.css";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <ToastProvider>
+        <RouterProvider router={router} />
+      </ToastProvider>
     </Provider>
   </React.StrictMode>
 );

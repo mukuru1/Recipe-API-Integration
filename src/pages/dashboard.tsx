@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useToast } from "@/hooks/useToast";
 import {
   useGetRecipesQuery,
   useAddRecipeMutation,
@@ -14,6 +15,7 @@ import type { Recipe } from "@/types";
 const Dashboard: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const { data: user } = useGetMeQuery();
 
@@ -72,7 +74,12 @@ const Dashboard: React.FC = () => {
 
   const handleDelete = async (id: number) => {
     if (window.confirm("Are you sure you want to delete this recipe?")) {
-      await deleteRecipe(id);
+      try {
+        await deleteRecipe(id).unwrap();
+        showToast("Recipe deleted successfully", "success");
+      } catch (error) {
+        showToast("Failed to delete recipe", "error");
+      }
     }
   };
 
@@ -84,6 +91,7 @@ const Dashboard: React.FC = () => {
           id: editingRecipe.id,
           ...formData,
         }).unwrap();
+        showToast("Recipe updated successfully", "success");
       } else {
         await addRecipe({
           ...formData,
@@ -92,11 +100,12 @@ const Dashboard: React.FC = () => {
           ingredients: [],
           instructions: [],
         }).unwrap();
+        showToast("Recipe created successfully", "success");
       }
       setIsFormOpen(false);
     } catch (error) {
       console.error("Failed to save recipe", error);
-      alert("Failed to save recipe");
+      showToast("Failed to save recipe", "error");
     }
   };
 

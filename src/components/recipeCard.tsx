@@ -1,10 +1,12 @@
 import type { Recipe } from "@/types";
+import { useToast } from "@/hooks/useToast";
 
 interface Props {
   recipe: Recipe;
 }
 
 const RecipeCard: React.FC<Props> = ({ recipe }) => {
+  const { showToast } = useToast();
   return (
     <div className="bg-white rounded-xl shadow-sm border hover:shadow-md transition p-4 flex flex-col">
       <img
@@ -22,7 +24,10 @@ const RecipeCard: React.FC<Props> = ({ recipe }) => {
       </p>
 
       <div className="mt-auto pt-4">
-        <button className="w-full bg-teal-500 hover:bg-teal-600 text-white py-2 rounded-lg font-medium transition">
+        <button
+          onClick={() => showToast(`Opening recipe: ${recipe.name}`, "info")}
+          className="w-full bg-teal-500 hover:bg-teal-600 text-white py-2 rounded-lg font-medium transition"
+        >
           View Recipe
         </button>
       </div>

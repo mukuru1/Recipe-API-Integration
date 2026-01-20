@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useToast } from "@/hooks/useToast";
 import { useLoginMutation } from "@/features/auth/authApi";
 import { useAppDispatch } from "@/hooks/redux";
 import { setCredentials } from "@/features/auth/authSlice";
@@ -11,12 +12,18 @@ const Login: React.FC = () => {
   const [login] = useLoginMutation();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await login({ username, password }).unwrap();
-    dispatch(setCredentials({ user: res, token: res.accessToken }));
-    navigate("/dashboard");
+    try {
+      const res = await login({ username, password }).unwrap();
+      dispatch(setCredentials({ user: res, token: res.accessToken }));
+      showToast("Logged in successfully", "success");
+      navigate("/dashboard");
+    } catch (err) {
+      showToast("Login failed. Check credentials.", "error");
+    }
   };
 
   return (
@@ -25,19 +32,19 @@ const Login: React.FC = () => {
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-xl shadow w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">
+        <h2 className="text-2xl font-bold mb-6 text-center text-slate-800">
           Welcome Back
         </h2>
 
         <input
-          className="w-full border p-3 rounded mb-4"
+          className="w-full border p-3 rounded mb-4 text-slate-800 placeholder:text-slate-400"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
 
         <input
-          className="w-full border p-3 rounded mb-6"
+          className="w-full border p-3 rounded mb-6 text-slate-800 placeholder:text-slate-400"
           type="password"
           placeholder="Password"
           value={password}
