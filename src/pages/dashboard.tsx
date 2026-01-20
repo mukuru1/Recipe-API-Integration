@@ -189,7 +189,7 @@ const Dashboard: React.FC = () => {
                         difficulty: e.target.value as "Easy" | "Medium" | "Hard",
                       })
                     }
-                    className="w-full border p-2 rounded focus:ring-2 focus:ring-teal-500 outline-none"
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-teal-500 outline-none text-slate-800 bg-white"
                   >
                     <option value="Easy">Easy</option>
                     <option value="Medium">Medium</option>
@@ -210,7 +210,7 @@ const Dashboard: React.FC = () => {
                         prepTimeMinutes: Number(e.target.value),
                       })
                     }
-                    className="w-full border p-2 rounded focus:ring-2 focus:ring-teal-500 outline-none"
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-teal-500 outline-none text-slate-800 bg-white"
                   />
                 </div>
 
@@ -227,7 +227,7 @@ const Dashboard: React.FC = () => {
                         cookTimeMinutes: Number(e.target.value),
                       })
                     }
-                    className="w-full border p-2 rounded focus:ring-2 focus:ring-teal-500 outline-none"
+                    className="w-full border p-2 rounded focus:ring-2 focus:ring-teal-500 outline-none text-slate-800 bg-white"
                   />
                 </div>
 
@@ -297,7 +297,7 @@ const Dashboard: React.FC = () => {
                         <td className="p-4 text-right">
                           <button
                             onClick={() => handleEdit(recipe)}
-                            className="text-white-500 hover:text-blue-700 font-medium mr-4"
+                            className="text-blue-500 hover:text-blue-700 font-medium mr-4"
                           >
                             Edit
                           </button>

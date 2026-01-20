@@ -70,7 +70,7 @@ const LandingPage: React.FC = () => {
           <input
             type="text"
             placeholder="Search recipes..."
-            className="w-full md:w-1/3 px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+            className="w-full md:w-1/3 px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-slate-800 bg-white"
             value={search}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setSearch(e.target.value)
@@ -81,7 +81,7 @@ const LandingPage: React.FC = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 text-slate-800 bg-white"
             >
               <option value="name">Name</option>
               <option value="rating">Rating</option>
@@ -92,7 +92,7 @@ const LandingPage: React.FC = () => {
             <select
               value={order}
               onChange={(e) => setOrder(e.target.value as "asc" | "desc")}
-              className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 text-slate-800 bg-white"
             >
               <option value="asc">Ascending</option>
               <option value="desc">Descending</option>
