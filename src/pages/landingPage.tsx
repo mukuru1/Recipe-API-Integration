@@ -1,6 +1,7 @@
 import { useState, ChangeEvent } from "react";
 import { Link } from "react-router-dom";
 import RecipeCard from "@/components/recipeCard";
+import Pagination from "@/components/pagination";
 import { useGetRecipesQuery } from "@/features/recipe/recipeApi";
 import { useAuth } from "@/hooks/useAuth";
 import type { Recipe } from "@/types";
@@ -75,7 +76,7 @@ const LandingPage: React.FC = () => {
             }
             className="w-full md:w-1/3 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
           />
-          
+
           <div className="flex gap-4 items-center">
             <select
               value={sortBy}
@@ -87,7 +88,7 @@ const LandingPage: React.FC = () => {
               <option value="prepTimeMinutes">Prep Time</option>
               <option value="cookTimeMinutes">Cook Time</option>
             </select>
-            
+
             <select
               value={order}
               onChange={(e) => setOrder(e.target.value as "asc" | "desc")}
@@ -105,11 +106,22 @@ const LandingPage: React.FC = () => {
         {isLoading ? (
           <p>Loading...</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {data?.recipes.map((recipe: Recipe) => (
-              <RecipeCard key={recipe.id} recipe={recipe} />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {data?.recipes.map((recipe: Recipe) => (
+                <RecipeCard key={recipe.id} recipe={recipe} />
+              ))}
+            </div>
+
+            {data && (
+              <Pagination
+                page={page}
+                totalPages={Math.ceil(data.total / limit)}
+                onPrev={() => setPage((p) => Math.max(1, p - 1))}
+                onNext={() => setPage((p) => Math.min(Math.ceil(data.total / limit), p + 1))}
+              />
+            )}
+          </>
         )}
       </main>
     </div>

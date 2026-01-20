@@ -1,15 +1,15 @@
 import { api } from "@/api/api";
-import type { LoginResponse, User } from "@/types";
+import { User, LoginResponse } from "@/types/auth";
 
-interface LoginPayload {
+// Define the LoginRequest type locally if not in types
+interface LoginRequest {
   username: string;
   password: string;
 }
 
-
 export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.mutation<LoginResponse, LoginPayload>({
+    login: builder.mutation<LoginResponse, LoginRequest>({
       query: (credentials) => ({
         url: "/auth/login",
         method: "POST",
