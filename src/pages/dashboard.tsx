@@ -297,7 +297,7 @@ const Dashboard: React.FC = () => {
                         <td className="p-4 text-right">
                           <button
                             onClick={() => handleEdit(recipe)}
-                            className="text-blue-500 hover:text-blue-700 font-medium mr-4"
+                            className="text-white-500 hover:text-blue-700 font-medium mr-4"
                           >
                             Edit
                           </button>
