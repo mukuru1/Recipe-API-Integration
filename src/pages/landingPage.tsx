@@ -37,7 +37,7 @@ const LandingPage: React.FC = () => {
               Dashboard
             </Link>
           ) : (
-            <Link to="/login" className="bg-teal-500 px-4 py-1 rounded">
+            <Link to="/login" className="bg-white-500 px-4 py-1 rounded">
               Login
             </Link>
           )}
