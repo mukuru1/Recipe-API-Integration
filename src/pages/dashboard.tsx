@@ -16,8 +16,7 @@ const Dashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const { data: user } = useGetMeQuery();
-  // We'll fetch a larger list or handle server-side pagination for real apps,
-  // but for this dashboard list lets fetch the first 20.
+
   const { data: recipesData, isLoading } = useGetRecipesQuery({
     page: 1,
     limit: 20,
@@ -233,7 +232,7 @@ const Dashboard: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setIsFormOpen(false)}
-                    className="bg-slate-200 hover:bg-slate-300 text-slate-700 px-6 py-2 rounded-lg font-medium transition"
+                    className="bg-slate-200 hover:bg-slate-300 text-red-700 px-6 py-2 rounded-lg font-medium transition"
                   >
                     Cancel
                   </button>
