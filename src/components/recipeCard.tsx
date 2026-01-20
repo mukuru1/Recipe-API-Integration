@@ -1,5 +1,6 @@
 import type { Recipe } from "@/types";
 import { useToast } from "@/hooks/useToast";
+import Rating from "./Rating";
 
 interface Props {
   recipe: Recipe;
@@ -22,6 +23,10 @@ const RecipeCard: React.FC<Props> = ({ recipe }) => {
       <p className="text-sm text-slate-500 mt-1">
         Difficulty: {recipe.difficulty}
       </p>
+
+      <div className="mt-2">
+        <Rating rating={recipe.rating} reviewCount={recipe.reviewCount} />
+      </div>
 
       <div className="mt-auto pt-4">
         <button

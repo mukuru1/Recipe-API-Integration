@@ -11,6 +11,7 @@ import { useAppDispatch } from "@/hooks/redux";
 import { logout } from "@/features/auth/authSlice";
 import { useNavigate, Link } from "react-router-dom";
 import type { Recipe } from "@/types";
+import Rating from "@/components/Rating";
 
 const Dashboard: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -216,13 +217,17 @@ const Dashboard: React.FC = () => {
                     {recipe.name}
                   </h3>
 
-                  <div className="flex items-center gap-4 text-indigo-300 text-sm mb-6">
+                  <div className="flex items-center gap-4 text-indigo-300 text-sm mb-4">
                     <span className="flex items-center gap-1">
                       ⌚ {recipe.prepTimeMinutes + recipe.cookTimeMinutes} min
                     </span>
                     <span className="flex items-center gap-1">
                       🔥 {recipe.caloriesPerServing} cal
                     </span>
+                  </div>
+
+                  <div className="mb-6">
+                    <Rating rating={recipe.rating} reviewCount={recipe.reviewCount} />
                   </div>
 
                   <div className="mt-auto grid grid-cols-2 gap-3">
