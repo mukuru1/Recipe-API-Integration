@@ -96,13 +96,13 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-4">
-      <div className="bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-2xl shadow-2xl w-full max-w-md transform transition-all hover:scale-[1.01]">
+    <div className="min-h-screen flex items-center justify-center bg-primary p-4">
+      <div className="bg-primary/50 backdrop-blur-lg border border-secondary p-8 rounded-2xl shadow-2xl w-full max-w-md transform transition-all hover:scale-[1.01]">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-extrabold text-white mb-2 tracking-tight">
+          <h1 className="text-4xl font-extrabold text-secondary mb-2 tracking-tight">
             {isLogin ? "Welcome Back" : "Join Us"}
           </h1>
-          <p className="text-indigo-200">
+          <p className="text-secondary/80">
             {isLogin ? "Enter your details to access your recipes" : "Start your culinary journey today"}
           </p>
         </div>
@@ -111,21 +111,21 @@ const Login: React.FC = () => {
           {!isLogin && (
             <div className="grid grid-cols-2 gap-4">
               <input
-                className="w-full bg-white/20 border border-white/10 rounded-lg p-3 text-white placeholder-indigo-200 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
+                className="w-full bg-secondary border border-secondary rounded-lg p-3 text-primary placeholder-primary/60 focus:outline-none focus:ring-2 focus:ring-secondary transition"
                 placeholder="First Name"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
               />
               <input
-                className="w-full bg-white/20 border border-white/10 rounded-lg p-3 text-white placeholder-indigo-200 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
+                className="w-full bg-secondary border border-secondary rounded-lg p-3 text-primary placeholder-primary/60 focus:outline-none focus:ring-2 focus:ring-secondary transition"
                 placeholder="Last Name"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 required
               />
               <input
-                className="col-span-2 w-full bg-white/20 border border-white/10 rounded-lg p-3 text-white placeholder-indigo-200 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
+                className="col-span-2 w-full bg-secondary border border-secondary rounded-lg p-3 text-primary placeholder-primary/60 focus:outline-none focus:ring-2 focus:ring-secondary transition"
                 placeholder="Email"
                 type="email"
                 value={email}
@@ -136,7 +136,7 @@ const Login: React.FC = () => {
           )}
 
           <input
-            className="w-full bg-white/20 border border-white/10 rounded-lg p-3 text-white placeholder-indigo-200 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
+            className="w-full bg-secondary border border-secondary rounded-lg p-3 text-primary placeholder-primary/60 focus:outline-none focus:ring-2 focus:ring-secondary transition"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -144,7 +144,7 @@ const Login: React.FC = () => {
           />
 
           <input
-            className="w-full bg-white/20 border border-white/10 rounded-lg p-3 text-white placeholder-indigo-200 focus:outline-none focus:ring-2 focus:ring-pink-400 transition"
+            className="w-full bg-secondary border border-secondary rounded-lg p-3 text-primary placeholder-primary/60 focus:outline-none focus:ring-2 focus:ring-secondary transition"
             type="password"
             placeholder="Password"
             value={password}
@@ -154,7 +154,7 @@ const Login: React.FC = () => {
 
           <button
             disabled={isLoading}
-            className="w-full bg-white text-indigo-600 py-3 rounded-xl font-bold text-lg hover:bg-indigo-50 transition shadow-lg mt-6"
+            className="w-full bg-secondary text-primary py-3 rounded-xl font-bold text-lg hover:bg-white/90 transition shadow-lg mt-6"
           >
             {isLoading ? "Processing..." : (isLogin ? "Sign In" : "Sign Up")}
           </button>
@@ -167,7 +167,7 @@ const Login: React.FC = () => {
               setUsername("");
               setPassword("");
             }}
-            className="text-white/80 hover:text-white font-medium text-sm transition underline decoration-transparent hover:decoration-white underline-offset-4"
+            className="text-secondary/80 hover:text-secondary font-medium text-sm transition underline decoration-transparent hover:decoration-secondary underline-offset-4"
           >
             {isLogin
               ? "Don't have an account? Register now"

@@ -15,27 +15,27 @@ const Rating: React.FC<RatingProps> = ({ rating, reviewCount }) => {
                 {[...Array(5)].map((_, i) => {
                     if (i < fullStars) {
                         return (
-                            <span key={i} className="text-amber-400 text-sm">
+                            <span key={i} className="text-primary text-sm">
                                 ★
                             </span>
                         );
                     } else if (i === fullStars && hasHalfStar) {
                         return (
-                            <span key={i} className="text-amber-400 text-sm relative">
+                            <span key={i} className="text-primary text-sm relative">
                                 <span className="absolute overflow-hidden w-1/2">★</span>
-                                <span className="text-slate-300">★</span>
+                                <span className="text-primary/30">★</span>
                             </span>
                         );
                     } else {
                         return (
-                            <span key={i} className="text-slate-300 text-sm">
+                            <span key={i} className="text-primary/30 text-sm">
                                 ★
                             </span>
                         );
                     }
                 })}
             </div>
-            <span className="text-xs font-medium text-slate-500">
+            <span className="text-xs font-medium text-primary/70">
                 ({reviewCount})
             </span>
         </div>

@@ -122,20 +122,20 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900">
+    <div className="min-h-screen bg-secondary font-sans text-primary">
       {/* Top Navigation */}
-      <nav className="bg-indigo-950/50 backdrop-blur-md border-b border-indigo-800 sticky top-0 z-10">
+      <nav className="bg-primary backdrop-blur-md border-b border-primary/20 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold text-white tracking-wide">
-            Recipe<span className="text-rose-500">Hub</span>
+          <Link to="/" className="text-2xl font-bold text-secondary tracking-wide">
+            Recipe<span className="text-secondary/70">Hub</span>
           </Link>
           <div className="flex items-center gap-6">
-            <span className="hidden md:inline text-indigo-200">
+            <span className="hidden md:inline text-secondary/80">
               Welcome, {user?.firstName || "Chef"}
             </span>
             <button
               onClick={handleLogout}
-              className="bg-indigo-800 hover:bg-rose-500 text-white px-5 py-2 rounded-full transition-all duration-300 shadow-md hover:shadow-rose-500/20"
+              className="bg-secondary hover:bg-secondary/90 text-primary px-5 py-2 rounded-full transition-all duration-300 shadow-md"
             >
               Logout
             </button>
@@ -146,30 +146,28 @@ const Dashboard: React.FC = () => {
       <div className="max-w-7xl mx-auto p-6 space-y-10">
         {/* Profile Hero Section */}
         {user && (
-          <div className="bg-gradient-to-r from-indigo-800 to-indigo-900 rounded-3xl p-8 shadow-xl border border-indigo-700 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-rose-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+          <div className="bg-primary rounded-3xl p-8 shadow-xl border border-primary flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
 
             <div className="relative">
               <img
                 src={user.image}
                 alt={user.username}
-                className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-rose-500 shadow-lg object-cover bg-indigo-950"
+                className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-secondary shadow-lg object-cover bg-primary"
               />
-              <div className="absolute bottom-0 right-0 w-6 h-6 bg-green-400 rounded-full border-4 border-indigo-800"></div>
             </div>
 
             <div className="text-center md:text-left z-0">
-              <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+              <h1 className="text-3xl md:text-4xl font-bold text-secondary mb-2">
                 {user.firstName} {user.lastName}
               </h1>
-              <p className="text-indigo-200 text-lg mb-1">@{user.username}</p>
-              <p className="text-indigo-300/80">{user.email}</p>
+              <p className="text-secondary/80 text-lg mb-1">@{user.username}</p>
+              <p className="text-secondary/60">{user.email}</p>
             </div>
 
             <div className="md:ml-auto flex gap-4">
-              <div className="text-center bg-indigo-950/50 p-4 rounded-xl border border-indigo-700/50">
-                <p className="text-2xl font-bold text-white">{recipesData?.total || 0}</p>
-                <p className="text-xs text-indigo-300 uppercase tracking-wider">Recipes</p>
+              <div className="text-center bg-primary/50 p-4 rounded-xl border border-secondary/20">
+                <p className="text-2xl font-bold text-secondary">{recipesData?.total || 0}</p>
+                <p className="text-xs text-secondary/70 uppercase tracking-wider">Recipes</p>
               </div>
             </div>
           </div>
@@ -177,13 +175,13 @@ const Dashboard: React.FC = () => {
 
         {/* Recipe Management Header */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <h2 className="text-3xl font-bold text-slate-900 flex items-center gap-3">
-            <span className="w-2 h-8 bg-rose-500 rounded-full"></span>
+          <h2 className="text-3xl font-bold text-primary flex items-center gap-3">
+            <span className="w-2 h-8 bg-primary rounded-full"></span>
             My Recipes
           </h2>
           <button
             onClick={handleAddNew}
-            className="group flex items-center gap-2 bg-rose-500 hover:bg-rose-600 text-white px-6 py-3 rounded-xl font-semibold transition-all shadow-lg shadow-rose-500/20 transform hover:-translate-y-0.5"
+            className="group flex items-center gap-2 bg-primary hover:opacity-90 text-secondary px-6 py-3 rounded-xl font-semibold transition-all shadow-lg transform hover:-translate-y-0.5"
           >
             <span className="text-xl leading-none">+</span> Add New Recipe
           </button>
@@ -192,14 +190,14 @@ const Dashboard: React.FC = () => {
         {/* Recipe Grid */}
         {isLoading ? (
           <div className="flex justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-rose-500"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {recipesData?.recipes.map((recipe: Recipe) => (
               <div
                 key={recipe.id}
-                className="group bg-indigo-950 rounded-2xl overflow-hidden border border-indigo-800 hover:border-rose-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-900/50 flex flex-col"
+                className="group bg-primary rounded-2xl overflow-hidden border border-primary hover:border-primary/80 transition-all duration-300 hover:shadow-xl flex flex-col"
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
@@ -213,11 +211,11 @@ const Dashboard: React.FC = () => {
                 </div>
 
                 <div className="p-5 flex-1 flex flex-col">
-                  <h3 className="text-xl font-bold text-white mb-2 line-clamp-1 group-hover:text-rose-400 transition-colors">
+                  <h3 className="text-xl font-bold text-secondary mb-2 line-clamp-1 group-hover:text-secondary/80 transition-colors">
                     {recipe.name}
                   </h3>
 
-                  <div className="flex items-center gap-4 text-indigo-300 text-sm mb-4">
+                  <div className="flex items-center gap-4 text-secondary/70 text-sm mb-4">
                     <span className="flex items-center gap-1">
                       ⌚ {recipe.prepTimeMinutes + recipe.cookTimeMinutes} min
                     </span>
@@ -233,13 +231,13 @@ const Dashboard: React.FC = () => {
                   <div className="mt-auto grid grid-cols-2 gap-3">
                     <button
                       onClick={() => handleEdit(recipe)}
-                      className="bg-indigo-900 hover:bg-indigo-800 text-indigo-100 py-2.5 rounded-lg font-medium transition-colors border border-indigo-700"
+                      className="bg-secondary/10 hover:bg-secondary/20 text-secondary py-2.5 rounded-lg font-medium transition-colors border border-secondary/20"
                     >
                       Update
                     </button>
                     <button
                       onClick={() => handleDelete(recipe.id)}
-                      className="bg-transparent hover:bg-rose-500/10 text-rose-500 hover:text-rose-400 py-2.5 rounded-lg font-medium transition-colors border border-rose-500/30 hover:border-rose-500"
+                      className="bg-transparent hover:bg-white/10 text-secondary hover:text-white py-2.5 rounded-lg font-medium transition-colors border border-secondary/30 hover:border-secondary"
                     >
                       Delete
                     </button>
@@ -255,17 +253,17 @@ const Dashboard: React.FC = () => {
       {isFormOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div
-            className="absolute inset-0 bg-indigo-950/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-primary/80 backdrop-blur-sm"
             onClick={() => setIsFormOpen(false)}
           ></div>
-          <div className="bg-indigo-900 border border-indigo-700 w-full max-w-2xl rounded-2xl shadow-2xl relative z-10 overflow-hidden animate-in fade-in zoom-in duration-200">
-            <div className="p-6 border-b border-indigo-800 bg-indigo-950/50 flex justify-between items-center">
-              <h3 className="text-2xl font-bold text-white">
+          <div className="bg-primary border border-secondary/20 w-full max-w-2xl rounded-2xl shadow-2xl relative z-10 overflow-hidden animate-in fade-in zoom-in duration-200">
+            <div className="p-6 border-b border-secondary/10 bg-primary/50 flex justify-between items-center">
+              <h3 className="text-2xl font-bold text-secondary">
                 {editingRecipe ? "Edit Recipe" : "Create New Recipe"}
               </h3>
               <button
                 onClick={() => setIsFormOpen(false)}
-                className="text-indigo-400 hover:text-white transition"
+                className="text-secondary/60 hover:text-secondary transition"
               >
                 ✕
               </button>
@@ -274,66 +272,66 @@ const Dashboard: React.FC = () => {
             <form onSubmit={handleSubmit} className="p-8 space-y-6">
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-indigo-300 mb-2">Recipe Name</label>
+                  <label className="block text-sm font-medium text-secondary/70 mb-2">Recipe Name</label>
                   <input
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-indigo-950 border border-indigo-700 rounded-xl p-3 text-white placeholder-indigo-500 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-all"
+                    className="w-full bg-primary border border-secondary/20 rounded-xl p-3 text-secondary placeholder-secondary/30 focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all"
                     placeholder="e.g. Spicy Ramen"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-indigo-300 mb-2">Difficulty</label>
+                    <label className="block text-sm font-medium text-secondary/70 mb-2">Difficulty</label>
                     <div className="relative">
                       <select
                         value={formData.difficulty}
                         onChange={(e) => setFormData({ ...formData, difficulty: e.target.value as any })}
-                        className="w-full bg-indigo-950 border border-indigo-700 rounded-xl p-3 text-white focus:outline-none focus:ring-2 focus:ring-rose-500 appearance-none cursor-pointer"
+                        className="w-full bg-primary border border-secondary/20 rounded-xl p-3 text-secondary focus:outline-none focus:ring-2 focus:ring-secondary appearance-none cursor-pointer"
                       >
                         <option value="Easy">Easy</option>
                         <option value="Medium">Medium</option>
                         <option value="Hard">Hard</option>
                       </select>
-                      <div className="absolute right-3 top-3.5 text-indigo-400 pointer-events-none">▼</div>
+                      <div className="absolute right-3 top-3.5 text-secondary/60 pointer-events-none">▼</div>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-indigo-300 mb-2">Prep Time (min)</label>
+                    <label className="block text-sm font-medium text-secondary/70 mb-2">Prep Time (min)</label>
                     <input
                       type="number"
                       value={formData.prepTimeMinutes}
                       onChange={(e) => setFormData({ ...formData, prepTimeMinutes: Number(e.target.value) })}
-                      className="w-full bg-indigo-950 border border-indigo-700 rounded-xl p-3 text-white focus:outline-none focus:ring-2 focus:ring-rose-500"
+                      className="w-full bg-primary border border-secondary/20 rounded-xl p-3 text-secondary focus:outline-none focus:ring-2 focus:ring-secondary"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-indigo-300 mb-2">Cook Time (min)</label>
+                    <label className="block text-sm font-medium text-secondary/70 mb-2">Cook Time (min)</label>
                     <input
                       type="number"
                       value={formData.cookTimeMinutes}
                       onChange={(e) => setFormData({ ...formData, cookTimeMinutes: Number(e.target.value) })}
-                      className="w-full bg-indigo-950 border border-indigo-700 rounded-xl p-3 text-white focus:outline-none focus:ring-2 focus:ring-rose-500"
+                      className="w-full bg-primary border border-secondary/20 rounded-xl p-3 text-secondary focus:outline-none focus:ring-2 focus:ring-secondary"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className="pt-4 flex gap-4 border-t border-indigo-800/50 mt-4">
+              <div className="pt-4 flex gap-4 border-t border-secondary/10 mt-4">
                 <button
                   type="submit"
-                  className="flex-1 bg-rose-500 hover:bg-rose-600 text-white py-3 rounded-xl font-bold transition shadow-lg shadow-rose-500/20"
+                  className="flex-1 bg-secondary hover:bg-secondary/90 text-primary py-3 rounded-xl font-bold transition shadow-lg"
                 >
                   {editingRecipe ? "Update Recipe" : "Create Recipe"}
                 </button>
                 <button
                   type="button"
                   onClick={() => setIsFormOpen(false)}
-                  className="px-6 bg-transparent hover:bg-indigo-800 text-indigo-300 hover:text-white py-3 rounded-xl font-bold transition border border-indigo-700"
+                  className="px-6 bg-transparent hover:bg-secondary/10 text-secondary hover:text-white py-3 rounded-xl font-bold transition border border-secondary/30"
                 >
                   Cancel
                 </button>
@@ -347,29 +345,29 @@ const Dashboard: React.FC = () => {
       {isDeleteModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div
-            className="absolute inset-0 bg-indigo-950/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-primary/80 backdrop-blur-sm"
             onClick={() => setIsDeleteModalOpen(false)}
           ></div>
-          <div className="bg-indigo-900 border border-indigo-700 w-full max-w-md rounded-2xl shadow-2xl relative z-10 overflow-hidden animate-in fade-in zoom-in duration-200">
+          <div className="bg-primary border border-secondary/20 w-full max-w-md rounded-2xl shadow-2xl relative z-10 overflow-hidden animate-in fade-in zoom-in duration-200">
             <div className="p-6 text-center">
-              <div className="w-16 h-16 bg-rose-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-3xl">🗑️</span>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Delete Recipe?</h3>
-              <p className="text-indigo-200 mb-6">
+              <h3 className="text-2xl font-bold text-secondary mb-2">Delete Recipe?</h3>
+              <p className="text-secondary/70 mb-6">
                 Are you sure you want to delete this recipe? This action cannot be undone.
               </p>
 
               <div className="flex gap-4">
                 <button
                   onClick={confirmDelete}
-                  className="flex-1 bg-rose-500 hover:bg-rose-600 text-white py-3 rounded-xl font-bold transition shadow-lg shadow-rose-500/20"
+                  className="flex-1 bg-secondary text-primary hover:bg-secondary/90 py-3 rounded-xl font-bold transition shadow-lg"
                 >
                   Yes, Delete
                 </button>
                 <button
                   onClick={() => setIsDeleteModalOpen(false)}
-                  className="flex-1 bg-transparent hover:bg-indigo-800 text-indigo-300 hover:text-white py-3 rounded-xl font-bold transition border border-indigo-700"
+                  className="flex-1 bg-transparent hover:bg-secondary/10 text-secondary hover:text-white py-3 rounded-xl font-bold transition border border-secondary/30"
                 >
                   Cancel
                 </button>

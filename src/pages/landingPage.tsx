@@ -24,39 +24,36 @@ const LandingPage: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-slate-100">
-
-      <nav className="bg-slate-800 text-white px-6 py-4 flex justify-between items-center">
-        <Link to="/" className="text-xl font-bold text-teal-400">
+    <div className="min-h-screen bg-secondary text-primary">
+      <nav className="bg-primary text-secondary px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-md">
+        <Link to="/" className="text-xl font-bold hover:text-secondary/80 transition">
           RecipeHub
         </Link>
-
         <div className="flex gap-4">
           {isAuthenticated ? (
-            <Link to="/dashboard" className="hover:text-teal-400">
+            <Link to="/dashboard" className="hover:text-secondary/80 font-medium">
               Dashboard
             </Link>
           ) : (
-            <Link to="/login" className="bg-white-500 px-4 py-1 rounded">
+            <Link to="/login" className="bg-secondary text-primary px-4 py-2 rounded-lg font-bold hover:bg-secondary/90 transition">
               Login
             </Link>
           )}
         </div>
       </nav>
 
-
-      <section className="bg-gradient-to-r from-teal-500 to-blue-600 text-white py-20">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+      <section className="bg-primary text-secondary py-24 text-center">
+        <div className="max-w-7xl mx-auto px-6">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
             Discover Amazing Recipes
           </h1>
-          <p className="text-xl md:text-2xl mb-8">
+          <p className="text-xl md:text-2xl mb-10 text-secondary/80 max-w-2xl mx-auto">
             Find your next favorite dish from our collection of delicious recipes
           </p>
           <div className="flex justify-center">
             <Link
               to="#recipes"
-              className="bg-white text-teal-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              className="bg-secondary text-primary px-8 py-3 rounded-full font-bold hover:bg-secondary/90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
               Explore Recipes
             </Link>
@@ -64,13 +61,12 @@ const LandingPage: React.FC = () => {
         </div>
       </section>
 
-
-      <div id="recipes" className="max-w-7xl mx-auto px-6 mt-6">
+      <div id="recipes" className="max-w-7xl mx-auto px-6 mt-12 mb-8">
         <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
           <input
             type="text"
             placeholder="Search recipes..."
-            className="w-full md:w-1/3 px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-slate-800 bg-white"
+            className="w-full md:w-1/3 px-4 py-3 border border-primary/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-primary bg-white shadow-sm"
             value={search}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setSearch(e.target.value)
@@ -81,7 +77,7 @@ const LandingPage: React.FC = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 text-slate-800 bg-white"
+              className="px-4 py-3 rounded-xl border border-primary/20 focus:outline-none focus:ring-2 focus:ring-primary text-primary bg-white shadow-sm cursor-pointer"
             >
               <option value="name">Name</option>
               <option value="rating">Rating</option>
@@ -92,7 +88,7 @@ const LandingPage: React.FC = () => {
             <select
               value={order}
               onChange={(e) => setOrder(e.target.value as "asc" | "desc")}
-              className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500 text-slate-800 bg-white"
+              className="px-4 py-3 rounded-xl border border-primary/20 focus:outline-none focus:ring-2 focus:ring-primary text-primary bg-white shadow-sm cursor-pointer"
             >
               <option value="asc">Ascending</option>
               <option value="desc">Descending</option>
